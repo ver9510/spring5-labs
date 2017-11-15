@@ -5,6 +5,6 @@ public interface Person {
     String getName ();
 
     default void sayHello(Person person) {
-        System.out.printf("Hello, %s%n", person.getName());
+        System.out.printf("Hello, %s, I`m %s%n", person.getName(), getName());
     }
 }
