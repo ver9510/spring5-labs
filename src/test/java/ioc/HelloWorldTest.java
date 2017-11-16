@@ -24,7 +24,7 @@ class HelloWorldTest {
         assertThat(person, is(getExpectedPerson()));
     }
 
-    private Person getExpectedPerson() {
+    static Person getExpectedPerson() {
         return new UsualPerson()
                 .setAge(35)
                 .setName("John Smith")

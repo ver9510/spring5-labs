@@ -1,6 +1,6 @@
 package demo;
 
-public enum  Singleton {
+public class Singleton {
 
     private static volatile Singleton instance;
 

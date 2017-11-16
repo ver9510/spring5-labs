@@ -36,7 +36,7 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-api:+',
             'org.junit.jupiter:junit-jupiter-engine:+',
             'org.hamcrest:java-hamcrest:+',
-//            'org.springframework:spring-test:+',
+            'org.springframework:spring-test:+',
             'org.mockito:mockito-core:+'
 }
 
