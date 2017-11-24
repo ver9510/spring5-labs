@@ -2,12 +2,9 @@ package lab.dao.jdbc.cp;
 
 import lombok.SneakyThrows;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
-public class HwJdbc {
+public class HwJdbc implements JdbcDao {
 
     private static final String URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
     private static final String DRIVER = "org.h2.Driver";
@@ -31,16 +28,28 @@ public class HwJdbc {
     private static final String SQL_SELECT = "SELECT * FROM Person WHERE id = 1";
 
     @SneakyThrows
-    static void printFirstName() {
+    void printFirstName() {
         Class.forName(DRIVER);
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement()) {
-            statement.executeUpdate(SQL_INIT);
-            statement.executeUpdate(SQL_INSERT);
-            try (ResultSet resultSet = statement.executeQuery(SQL_SELECT)) {
-                if (resultSet.next())
-                    System.out.println("first_name = " + resultSet.getString("first_name"));
+
+        String firstName = mapConnection(connection -> {
+            try (Statement statement = connection.createStatement()) {
+                statement.executeUpdate(SQL_INIT);
+                statement.executeUpdate(SQL_INSERT);
+                try (ResultSet resultSet = statement.executeQuery(SQL_SELECT)) {
+                    return !resultSet.next() ? null :
+                            "first_name = " + resultSet.getString("first_name");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        }
+        });
+
+        System.out.println(firstName);
+    }
+
+    @Override
+    @SneakyThrows
+    public Connection get() {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }

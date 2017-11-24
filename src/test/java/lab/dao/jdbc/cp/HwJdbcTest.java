@@ -11,7 +11,7 @@ class HwJdbcTest {
     @Test
     void name() {
         assertThat(
-                fromSystemOut(HwJdbc::printFirstName),
+                fromSystemOut((new HwJdbc())::printFirstName),
                 is("first_name = Jose\n"));
     }
 }
