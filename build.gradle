@@ -42,6 +42,9 @@ dependencies {
 
             'io.vavr:vavr:+'
 
+    // JDBC
+    testRuntimeOnly 'com.h2database:h2:+'
+
     compileOnly ':lombok-edge:', //'org.projectlombok:lombok:+',
             'edu.washington.cs.types.checker:checker-framework:+'
 
