@@ -1,6 +1,5 @@
 package common;
 
-import lab.model.Person;
 import lab.model.simple.UsualPerson;
 import lombok.SneakyThrows;
 import lombok.val;
@@ -33,11 +32,11 @@ public interface TestUtils {
      * @apiNote This method use some dirty hack in reflection API for making access to private field!
      */
     @SneakyThrows
-    static void setBroke(Person person, boolean broke) {
-        assert person.getClass() == UsualPerson.class;
-        Field brokeField = person.getClass().getDeclaredField("broke");
+    static void setValue2Field(Object o, String name, Object broke) {
+        assert o.getClass() == UsualPerson.class;
+        Field brokeField = o.getClass().getDeclaredField(name);
 //        if (!brokeField.canAccess(person))
             brokeField.setAccessible(true);
-        brokeField.set(person, broke);
+        brokeField.set(o, broke);
     }
 }

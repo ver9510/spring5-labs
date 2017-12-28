@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static common.TestUtils.fromSystemOut;
-import static common.TestUtils.setBroke;
+import static common.TestUtils.setValue2Field;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
@@ -32,7 +32,7 @@ class AopAspectJExceptionTest {
     @SneakyThrows
     @BeforeEach
     void setUp() {
-        setBroke(person,true);
+        setValue2Field(person,"broke",true);
     }
 
     @Test
@@ -49,6 +49,6 @@ class AopAspectJExceptionTest {
 
     @AfterEach
     void tearDown() {
-        setBroke(person,false);
+        setValue2Field(person,"broke", false);
     }
 }
