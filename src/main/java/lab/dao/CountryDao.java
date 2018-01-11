@@ -5,13 +5,11 @@ import lab.model.simple.SimpleCountry;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 
 import java.util.List;
 
-public class CountryDao extends JdbcDaoSupport {
+public class CountryDao extends NamedParameterJdbcDaoSupport {
     public static final String[][] COUNTRY_INIT_DATA = {{"Australia", "AU"},
             {"Canada", "CA"}, {"France", "FR"}, {"Hong Kong", "HK"},
             {"Iceland", "IC"}, {"Japan", "JP"}, {"Nepal", "NP"},
@@ -23,8 +21,7 @@ public class CountryDao extends JdbcDaoSupport {
     private static final String GET_COUNTRIES_BY_NAME_SQL = "select * from country where name like :name";
     private static final String GET_COUNTRY_BY_NAME_SQL = "select * from country where name = '";
     private static final String GET_COUNTRY_BY_CODE_NAME_SQL = "select * from country where code_name = '";
-    private static final String UPDATE_COUNTRY_NAME_SQL_1 = "update country SET name='";
-    private static final String UPDATE_COUNTRY_NAME_SQL_2 = " where code_name='";
+    private static final String UPDATE_COUNTRY_NAME_SQL = "UPDATE country SET name='%s' WHERE code_name='%s'";
 
     private static final RowMapper<Country> COUNTRY_ROW_MAPPER = (resultSet, i) ->
             new SimpleCountry(
@@ -33,21 +30,19 @@ public class CountryDao extends JdbcDaoSupport {
                     resultSet.getString("code_name"));
 
     public List<Country> getCountryList() {
-        // TODO: implement it
-        return null;
+        return getJdbcTemplate().query(GET_ALL_COUNTRIES_SQL, COUNTRY_ROW_MAPPER);
     }
 
     public List<Country> getCountryListStartWith(String name) {
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(
-                getDataSource());
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource(
-                "name", name + "%");
-        return namedParameterJdbcTemplate.query(GET_COUNTRIES_BY_NAME_SQL,
-                sqlParameterSource, COUNTRY_ROW_MAPPER);
+        return getNamedParameterJdbcTemplate()
+                .query(GET_COUNTRIES_BY_NAME_SQL,
+                        new MapSqlParameterSource("name", name + "%"),
+                        COUNTRY_ROW_MAPPER);
     }
 
     public void updateCountryName(String codeName, String newCountryName) {
-        // TODO: implement it
+        getJdbcTemplate()
+                .update(String.format(UPDATE_COUNTRY_NAME_SQL, newCountryName, codeName));
     }
 
     public void loadCountries() {
