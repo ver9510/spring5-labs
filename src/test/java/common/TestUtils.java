@@ -5,10 +5,29 @@ import lombok.SneakyThrows;
 import lombok.val;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface TestUtils {
+
+    static String toTestPropertiesResourceName (String name) {
+        return String.format("./src/test/resources/%s.properties", name);
+    }
+
+    static Iterable<String> toTestSqlResourceNames (String name) {
+        List<String> result = new ArrayList<>();
+        String sqlFilePathName;
+        for (int i = 1; new File(sqlFilePathName = toTestSqlResourceName(Integer.toString(i))).exists(); i++)
+            result.add(sqlFilePathName);
+        return result;
+    }
+
+    static String toTestSqlResourceName (String name) {
+        return String.format("./src/test/resources/%s.sql", name);
+    }
 
     @SneakyThrows
     static String fromSystemOut(Runnable runnable) {
