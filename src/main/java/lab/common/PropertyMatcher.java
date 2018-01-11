@@ -42,8 +42,8 @@ public interface PropertyMatcher extends Supplier<Properties> {
     default PropertyMatcher ensureKeysExist(String... keys) {
         Properties properties = get();
         return ensure(() -> {
-            for (String key: keys)
-                if(!properties.containsKey(key))
+            for (String key : keys)
+                if (!properties.containsKey(key))
                     return false;
             return true;
         });

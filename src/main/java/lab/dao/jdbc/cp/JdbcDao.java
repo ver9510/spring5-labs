@@ -1,7 +1,7 @@
 package lab.dao.jdbc.cp;
 
 import lab.common.function.ExceptionalConsumer;
-import io.vavr.CheckedFunction1;
+import lab.common.function.ExceptionalFunction;
 import lombok.SneakyThrows;
 import lombok.val;
 
@@ -14,9 +14,9 @@ import java.util.function.Supplier;
 public interface JdbcDao extends Supplier<Connection> {
 
     @SneakyThrows
-    default <T> T mapConnection(CheckedFunction1<Connection, T> connectionMapper) {
+    default <T> T mapConnection(ExceptionalFunction<Connection, T, SQLException> connectionMapper) {
         try (val con = get()) {
-            return connectionMapper.unchecked().apply(con);
+            return connectionMapper.map(con);
         }
     }
 
