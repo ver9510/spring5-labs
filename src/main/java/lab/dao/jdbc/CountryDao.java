@@ -1,4 +1,4 @@
-package lab.dao;
+package lab.dao.jdbc;
 
 import lab.model.Country;
 import lab.model.simple.SimpleCountry;
@@ -6,10 +6,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.List;
 
+@Repository
 public class CountryDao extends NamedParameterJdbcDaoSupport {
+
+    public CountryDao(DataSource dataSource) {
+        super.setDataSource(dataSource);
+    }
+
     public static final String[][] COUNTRY_INIT_DATA = {{"Australia", "AU"},
             {"Canada", "CA"}, {"France", "FR"}, {"Hong Kong", "HK"},
             {"Iceland", "IC"}, {"Japan", "JP"}, {"Nepal", "NP"},

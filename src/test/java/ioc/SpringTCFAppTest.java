@@ -1,6 +1,7 @@
 package ioc;
 
 import lab.model.Person;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,9 @@ import static org.hamcrest.core.Is.is;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:ioc.xml")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 class SpringTCFAppTest {
-	
-	@Autowired
+
 	private Person person;
 
 	@Test

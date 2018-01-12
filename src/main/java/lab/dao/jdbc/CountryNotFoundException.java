@@ -1,4 +1,4 @@
-package lab.dao;
+package lab.dao.jdbc;
 
 public class CountryNotFoundException extends Exception {
 }

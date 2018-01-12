@@ -1,6 +1,6 @@
 package db;
 
-import lab.dao.CountryDao;
+import lab.dao.jdbc.CountryDao;
 import lab.model.Country;
 import lab.model.simple.SimpleCountry;
 import org.junit.jupiter.api.BeforeEach;

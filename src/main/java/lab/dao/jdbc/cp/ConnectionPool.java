@@ -22,7 +22,7 @@ import java.util.function.Function;
 @FunctionalInterface
 public interface ConnectionPool extends JdbcDao {
 
-    String DEFAULT_DB_PROPERTIES_FILE_NAME = "db.properties";
+    String DEFAULT_DB_PROPERTIES_FILE_NAME = "jdbc.properties";
     String SQL_FILE_NAME_SUFFIX = ".sql";
     String JDBC_DRIVER_CLASS_KEY = "driver";
     String JDBC_URL_KEY = "url";
