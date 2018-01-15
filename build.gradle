@@ -14,7 +14,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0-M1'
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:+'
     }
 }
 
@@ -43,6 +43,13 @@ dependencies {
             // JDBC (+C3P0)
             'org.springframework:spring-jdbc:+',
             'com.mchange:c3p0:+',
+
+            // ORM
+            'org.springframework:spring-orm:+',
+            'org.hibernate:hibernate-spatial:+',
+            'org.hibernate:hibernate-validator:+',
+            'org.hibernate:hibernate-java8:+',
+            'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:+'
 
             'io.vavr:vavr:+'
 
