@@ -5,6 +5,7 @@ import lab.model.Country;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 @Repository
@@ -12,10 +13,14 @@ public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
 	@Override
 	public void save(Country country) {
-//		TODO: Implement it
-		EntityManager em = null;
+		EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
 
-		if (em != null) {
+        em.persist(country);
+
+        transaction.commit();
+        if (em != null) {
 			em.close();
 		}
 	}
