@@ -44,10 +44,11 @@ class DbcpTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
             connection.setAutoCommit(false);
-            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./resources/sql/1.sql"))));
-            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./resources/sql/2.sql"))));
-            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./resources/sql/3.sql"))));
-            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./resources/sql/4.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./src/test/resources/sql/1.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./src/test/resources/sql/2.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./src/test/resources/sql/3.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./src/test/resources/sql/4.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./src/test/resources/sql/5.sql"))));
             connection.commit();
 //            connection.rollback();
             connection.setAutoCommit(true);
