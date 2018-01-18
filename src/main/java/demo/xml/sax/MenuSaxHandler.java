@@ -1,5 +1,6 @@
 package demo.xml.sax;
 
+import demo.xml.MenuTagName;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.xml.sax.Attributes;
@@ -51,9 +52,7 @@ public class MenuSaxHandler extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) {
 
-        switch (MenuTagName.valueOf(
-                qName.toUpperCase()
-                        .replace("-", "_"))) {
+        switch (MenuTagName.getElementTagName(qName)) {
             case NAME:
                 foodBuilder.name(text.toString());
                 break;

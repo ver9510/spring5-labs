@@ -2,7 +2,6 @@ package demo.xml.sax;
 
 import lombok.SneakyThrows;
 import lombok.val;
-import org.hamcrest.core.Is;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,7 +10,6 @@ import org.xml.sax.XMLReader;
 
 import javax.xml.parsers.SAXParserFactory;
 import java.util.Iterator;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
