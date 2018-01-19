@@ -5,6 +5,7 @@ import lab.model.Country;
 import lab.model.simple.SimpleCountry;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ class JdbcTest {
         countryJdbcDao.clearDb();
     }
 
+    @Disabled
     @Test
     @DirtiesContext
     void testCountryList() {
@@ -54,6 +56,7 @@ class JdbcTest {
             assertEquals(countryList.get(i), expectedCountryList.get(i));
     }
 
+    @Disabled
     @Test
     @DirtiesContext
     void testCountryListStartsWithA() {
@@ -64,6 +67,7 @@ class JdbcTest {
             assertEquals(expectedCountryListStartsWithA.get(i), countryList.get(i));
     }
 
+    @Disabled
     @Test
     @DirtiesContext
     void testCountryChange() {

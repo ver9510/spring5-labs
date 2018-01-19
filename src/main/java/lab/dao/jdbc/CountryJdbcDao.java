@@ -3,7 +3,6 @@ package lab.dao.jdbc;
 import lab.dao.CountryNotFoundException;
 import lab.model.Country;
 import lab.model.simple.SimpleCountry;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
@@ -14,10 +13,6 @@ import java.util.List;
 
 @Repository
 public class CountryJdbcDao extends NamedParameterJdbcDaoSupport {
-
-    public CountryJdbcDao(DataSource dataSource) {
-        super.setDataSource(dataSource);
-    }
 
     public static final String[][] COUNTRY_INIT_DATA = {
             {"Australia", "AU"},
@@ -32,18 +27,20 @@ public class CountryJdbcDao extends NamedParameterJdbcDaoSupport {
             {"Switzerland", "CH"},
             {"United Kingdom", "GB"},
             {"United States", "US"}};
-
     private static final String LOAD_COUNTRIES_SQL = "INSERT INTO Country (name, code_name) VALUES ('%s', '%s')";
     private static final String GET_ALL_COUNTRIES_SQL = "SELECT id, name, code_name FROM Country";
     private static final String GET_COUNTRIES_BY_NAME_SQL = "SELECT id, name, code_name FROM Country WHERE name LIKE :name";
     private static final String GET_COUNTRY_BY_NAME_SQL = "SELECT id, name, code_name FROM Сountry WHERE name='%s'";
     private static final String GET_COUNTRY_BY_CODE_NAME_SQL = "SELECT id, name, code_name FROM Сountry WHERE code_name = '%s'";
     private static final String UPDATE_COUNTRY_NAME_SQL = "UPDATE Сountry SET name='%s' WHERE code_name='%s'";
-
     private static final RowMapper<Country> COUNTRY_ROW_MAPPER = (rs, i) -> new SimpleCountry(
             rs.getLong("id"),
             rs.getString("name"),
             rs.getString("code_name"));
+
+    public CountryJdbcDao(DataSource dataSource) {
+        super.setDataSource(dataSource);
+    }
 
     public List<Country> getCountryList() {
         return getJdbcTemplate().query(
@@ -65,6 +62,7 @@ public class CountryJdbcDao extends NamedParameterJdbcDaoSupport {
 
     //    @PostConstruct
     public void loadCountries() {
+        List<Country> countries = getJdbcTemplate().query("select * from country", COUNTRY_ROW_MAPPER);
         for (String[] countryData : COUNTRY_INIT_DATA)
             getJdbcTemplate().execute(
                     String.format(LOAD_COUNTRIES_SQL, countryData[0], countryData[1]));
