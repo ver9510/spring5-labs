@@ -1,12 +1,12 @@
 package lab.aop;
 
 import lab.model.Customer;
+import lab.model.CustomerBrokenException;
 import lab.model.Squishee;
+import lombok.SneakyThrows;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 
 @Aspect
 public class Politeness {
@@ -22,14 +22,17 @@ public class Politeness {
         System.out.println(("Is " + ((Squishee) retVal).getName() + " Good Enough? \n"));
     }
 
-    public void sayYouAreNotAllowed() {
+    @AfterThrowing("execution(* sellSquishee(..))")
+    public void sayYouAreNotAllowed() throws CustomerBrokenException{
         System.out.println("Hmmm... \n");
     }
 
+    @After("execution(* sellSquishee(..))")
     public void sayGoodBye() {
         System.out.println("Good Bye! \n");
     }
 
+    @Around("execution(* sellSquishee(..))")
     public Object sayPoliteWordsAndSell(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println(("Hi! \n"));
         Object retVal = pjp.proceed();

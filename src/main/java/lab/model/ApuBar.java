@@ -3,7 +3,7 @@ package lab.model;
 public class ApuBar implements Bar {
 
     @Override
-	public Squishee sellSquishee(Customer customer)  {
+	public Squishee sellSquishee(Customer customer) {
         if (customer.isBroke()){
             throw new CustomerBrokenException();
         }
