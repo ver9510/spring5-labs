@@ -33,8 +33,8 @@ public class CountryDao extends JdbcDaoSupport {
                     resultSet.getString("code_name"));
 
     public List<Country> getCountryList() {
-        // TODO: implement it
-        return null;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        return jdbcTemplate.query(GET_ALL_COUNTRIES_SQL,COUNTRY_ROW_MAPPER);
     }
 
     public List<Country> getCountryListStartWith(String name) {
@@ -48,6 +48,10 @@ public class CountryDao extends JdbcDaoSupport {
 
     public void updateCountryName(String codeName, String newCountryName) {
         // TODO: implement it
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        jdbcTemplate.execute(
+                UPDATE_COUNTRY_NAME_SQL_1 + newCountryName + "'" +
+                        UPDATE_COUNTRY_NAME_SQL_2 + codeName + "'");
     }
 
     public void loadCountries() {
@@ -60,12 +64,13 @@ public class CountryDao extends JdbcDaoSupport {
     }
 
     public Country getCountryByCodeName(String codeName) {
-        JdbcTemplate jdbcTemplate = getJdbcTemplate();
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
 
         String sql = GET_COUNTRY_BY_CODE_NAME_SQL + codeName + "'";
 //		System.out.println(sql);
-
-        return jdbcTemplate.query(sql, COUNTRY_ROW_MAPPER).get(0);
+        List<Country> countries = jdbcTemplate.query(GET_ALL_COUNTRIES_SQL, COUNTRY_ROW_MAPPER);
+        List<Country> query = jdbcTemplate.query(sql, COUNTRY_ROW_MAPPER);
+        return query.get(0);
     }
 
     public Country getCountryByName(String name)
