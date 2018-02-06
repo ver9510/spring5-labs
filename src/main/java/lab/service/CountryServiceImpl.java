@@ -20,6 +20,7 @@ public class CountryServiceImpl implements CountryService {
 
 	@Autowired
 	private CountryJdbcDao countryDao;
+
 	@Transactional(readOnly = false, propagation =
 			Propagation.REQUIRED)
 	public List<Country> getAllCountriesInsideTransaction(
