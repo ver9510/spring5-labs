@@ -10,20 +10,20 @@
     <!--<import resource="orm.xml"/>-->
     <context:component-scan base-package="lab.model"/>
 
-    <bean id="person" class="lab.model.simple.UsualPerson"
-          c:id="1"
-          c:name="John Smith"
-          c:age="35"
-          c:height="1.78"
-          c:isProgrammer="true"
-          c:broke="false"
-          c:country-ref="country"
-          c:contacts-ref="contacts"/>
+    <!--<bean id="person" class="lab.model.simple.UsualPerson"-->
+          <!--c:id="1"-->
+          <!--c:name="John Smith"-->
+          <!--c:age="35"-->
+          <!--c:height="1.78"-->
+          <!--c:isProgrammer="true"-->
+          <!--c:broke="false"-->
+          <!--c:country-ref="country"-->
+          <!--c:contacts-ref="contacts"/>-->
 
 
 
-    <util:list id="contacts" value-type="java.lang.String">
-        <value>asd@asd.ru</value>
-        <value>+7-234-456-67-89</value>
-    </util:list>
+    <!--<util:list id="contacts" value-type="java.lang.String">-->
+        <!--<value>asd@asd.ru</value>-->
+        <!--<value>+7-234-456-67-89</value>-->
+    <!--</util:list>-->
 </beans>

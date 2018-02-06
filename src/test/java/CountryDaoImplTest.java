@@ -3,6 +3,7 @@ import lab.model.Country;
 import lab.model.simple.SimpleCountry;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,37 +23,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Log4j2
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:orm.xml")
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 class CountryDaoImplTest {
 
-	private Country exampleCountry = new SimpleCountry(1, "Australia", "AU");
+    private Country exampleCountry = new SimpleCountry(1, "Australia", "AU");
 
-	private CountryDao countryDao;
+    @Autowired
+    private CountryDao countryDao;
 
-	@Test
-	void testSaveCountry() {
+    @BeforeEach
+    void setUp() {
+        countryDao.save(exampleCountry);
+    }
 
-		countryDao.save(exampleCountry);
+    @Test
+    void testSaveCountry() {
 
-		List<Country> countryList = countryDao.getAllCountries();
-		assertEquals(1, countryList.size());
-		assertEquals(exampleCountry, countryList.get(0));
-	}
+        List<Country> countryList = countryDao.getAllCountries();
+        assertEquals(1, countryList.size());
+        assertEquals(exampleCountry, countryList.get(0));
+    }
 
-	@Test
-	void testGtAllCountries() {
+    @Test
+    void testGtAllCountries() {
 
-		countryDao.save(new SimpleCountry(1, "Canada", "CA"));
+        countryDao.save(new SimpleCountry(2, "Canada", "CA"));
 
-		List<Country> countryList = countryDao.getAllCountries();
-		assertEquals(2, countryList.size());
-	}
+        List<Country> countryList = countryDao.getAllCountries();
+        assertEquals(2, countryList.size());
+    }
 
-	@Test
-	void testGetCountryByName() {
-
-		Country country = countryDao.getCountryByName("Australia");
-		assertEquals(exampleCountry, country);
-	}
+    @Test
+    void testGetCountryByName() {
+        Country country = countryDao.getCountryByName("Australia");
+        assertEquals(exampleCountry, country);
+    }
 
 }

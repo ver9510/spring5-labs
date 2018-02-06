@@ -2,6 +2,7 @@ package lab.model.simple;
 
 import lab.model.Country;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,39 +14,21 @@ import java.io.Serializable;
 @Table(name = "Country")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class SimpleCountry implements Country, Serializable {
-
-    private int id;
-
-    private String name;
-
-    private String codeName;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private int id;
 
     @Column(name = "NAME")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @Column(name = "CODE_NAME")
-    public String getCodeName() {
-        return codeName;
-    }
+    private String codeName;
 
-    public void setCodeName(String codeName) {
+    public SimpleCountry(String name, String codeName) {
+        this.name = name;
         this.codeName = codeName;
     }
 }
