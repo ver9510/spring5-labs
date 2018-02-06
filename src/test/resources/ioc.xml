@@ -7,7 +7,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <import resource="orm.xml"/>
+    <!--<import resource="orm.xml"/>-->
     <context:component-scan base-package="lab.model"/>
 
     <bean id="person" class="lab.model.simple.UsualPerson"

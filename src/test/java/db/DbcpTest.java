@@ -16,6 +16,7 @@ import java.sql.Statement;
 class DbcpTest {
 
     private static final String SQL = "SELECT account_number, account_type, person_name FROM account";
+    private static final String SQL_PATH = "C:\\Users\\Vera_Ippo\\IdeaProjects\\spring5-labs\\src\\test\\resources\\sql\\";
 
     private DataSource dataSource;
 
@@ -44,10 +45,10 @@ class DbcpTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
             connection.setAutoCommit(false);
-            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./resources/sql/1.sql"))));
-            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./resources/sql/2.sql"))));
-            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./resources/sql/3.sql"))));
-            statement.executeUpdate(new String(Files.readAllBytes(Paths.get("./resources/sql/4.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get(SQL_PATH+"1.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get(SQL_PATH+"2.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get(SQL_PATH+"3.sql"))));
+            statement.executeUpdate(new String(Files.readAllBytes(Paths.get(SQL_PATH+"4.sql"))));
             connection.commit();
 //            connection.rollback();
             connection.setAutoCommit(true);
