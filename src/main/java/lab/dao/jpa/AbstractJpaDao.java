@@ -1,5 +1,7 @@
 package lab.dao.jpa;
 
+import lab.dao.CountryDao;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 

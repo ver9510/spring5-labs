@@ -2,6 +2,7 @@ package lab.model.simple;
 
 import lab.model.Country;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +11,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Country")
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor
+@NoArgsConstructor
 public class SimpleCountry implements Country, Serializable {
 
     private int id;

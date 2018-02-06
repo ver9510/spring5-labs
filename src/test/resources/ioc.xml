@@ -20,10 +20,7 @@
           c:country-ref="country"
           c:contacts-ref="contacts"/>
 
-    <bean id="country" class="lab.model.simple.SimpleCountry"
-          c:id="1"
-          c:name="Russia"
-          c:codeName="RU"/>
+
 
     <util:list id="contacts" value-type="java.lang.String">
         <value>asd@asd.ru</value>
